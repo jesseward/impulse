@@ -203,8 +203,8 @@ func (m model) View() string {
 	var footerView string
 	if m.flashMessage != "" {
 		style := lipgloss.NewStyle().
-			Foreground(lipgloss.Color("#FFFFFF")).
-			Background(lipgloss.Color("200")).
+			Foreground(CurrentTheme.ActiveRowFg).
+			Background(CurrentTheme.ActiveRowBg).
 			Padding(0, 1)
 		footerView = style.Render(m.flashMessage)
 	} else {
@@ -219,8 +219,8 @@ func (m model) View() string {
 
 	if m.activeView == showQuitConfirmation {
 		dialogBox := lipgloss.NewStyle().
-			Border(lipgloss.RoundedBorder()).
-			Inherit(borderColorStyle).
+			Border(CurrentTheme.AppBorder).
+			Inherit(BorderColorStyle).
 			Padding(1, 0).
 			BorderTop(true).
 			BorderLeft(true).

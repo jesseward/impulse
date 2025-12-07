@@ -20,8 +20,8 @@ func newWaveformModel(s module.Sample, w, h int) waveformModel {
 }
 
 func (m waveformModel) View() string {
-	title := titleStyle.Render("Sample '" + m.sample.Name() + "'")
-	waveform := noteStyle.Render(module.AsciiWaveform(m.sample, m.width/2, m.height/2))
+	title := TitleStyle.Render("Sample '" + m.sample.Name() + "'")
+	waveform := NoteStyle.Render(module.AsciiWaveform(m.sample, m.width/2, m.height/2))
 
 	// Calculate the size of the dialog box (50% of screen) and add some padding
 	dialogWidth := (m.width / 2) + 6
@@ -29,7 +29,7 @@ func (m waveformModel) View() string {
 
 	// Create the styled dialog box
 	dialogBox := lipgloss.NewStyle().
-		Border(lipgloss.RoundedBorder(), true).Inherit(borderColorStyle).
+		Border(CurrentTheme.AppBorder, true).Inherit(BorderColorStyle).
 		Padding(1, 1).
 		Width(dialogWidth).   // Set the width
 		Height(dialogHeight). // Set the height

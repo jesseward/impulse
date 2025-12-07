@@ -5,7 +5,6 @@ import (
 	"time"
 
 	tea "github.com/charmbracelet/bubbletea"
-	"github.com/charmbracelet/lipgloss"
 	"github.com/jesseward/impulse/internal/player"
 	"github.com/jesseward/impulse/pkg/module"
 )
@@ -13,14 +12,6 @@ import (
 const (
 	minWidth  = 80
 	minHeight = 24
-)
-
-var (
-	titleStyle = lipgloss.NewStyle().
-			Background(lipgloss.Color("27")). // A nice purple
-			Foreground(lipgloss.Color("15")).
-			Padding(0, 1)
-	borderColorStyle = lipgloss.NewStyle().BorderForeground(lipgloss.Color("15"))
 )
 
 func New(m module.Module) {
