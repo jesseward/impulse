@@ -17,6 +17,7 @@ import (
 func playAction(c *cli.Context) error {
 	filePath := c.String("file")
 	startUI := c.Bool("ui")
+	themeName := c.String("theme")
 
 	logFile, err := os.OpenFile("impulse.log", os.O_CREATE|os.O_WRONLY|os.O_TRUNC, 0666)
 	if err != nil {
@@ -24,6 +25,10 @@ func playAction(c *cli.Context) error {
 	}
 	defer logFile.Close()
 	log.SetOutput(logFile)
+
+	if err := ui.SetTheme(themeName); err != nil {
+		return cli.Exit(fmt.Sprintf("Invalid theme: %v", err), 1)
+	}
 
 	var m module.Module
 	m, err = loadModule(filePath)

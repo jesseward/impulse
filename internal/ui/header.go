@@ -13,16 +13,6 @@ const (
 	keyWidth = 12
 )
 
-var (
-	headerStyle = lipgloss.NewStyle().
-			Border(lipgloss.NormalBorder(), true).
-			Inherit(borderColorStyle).
-			Padding(0, 1)
-	labelStyle     = lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Color("27"))
-	valueStyle     = lipgloss.NewStyle().Foreground(lipgloss.Color("15"))
-	separatorStyle = lipgloss.NewStyle().Foreground(lipgloss.Color("238"))
-)
-
 type headerModel struct {
 	module   module.Module
 	width    int
@@ -69,29 +59,28 @@ func (m headerModel) View() string {
 		{"Position", strconv.Itoa(m.state.Order), "Time", fmt.Sprintf("%02d:%02d", m.duration/60, m.duration%60), "Speed", strconv.Itoa(m.speed)},
 	}
 
-	contentWidth := m.width - headerStyle.GetHorizontalFrameSize() - 3
+	contentWidth := m.width - HeaderStyle.GetHorizontalFrameSize() - 3
 
 	columnWidth := contentWidth / 3
 	lastColumnWidth := contentWidth - (columnWidth * 2)
 
 	var rows []string
 	for _, r := range data {
-		// --- ✨ FIX: Build each part of the column separately ---
-		key1 := labelStyle.Copy().Width(keyWidth).Render(r.left)
-		sep := separatorStyle.Render(" | ")
-		val1 := valueStyle.Render(r.lvalue)
+		key1 := LabelStyle.Copy().Width(keyWidth).Render(r.left)
+		sep := SeparatorStyle.Render(" │ ")
+		val1 := ValueStyle.Render(r.lvalue)
 		// Join the parts to create the aligned content for the column.
 		col1Content := lipgloss.JoinHorizontal(lipgloss.Left, key1, sep, val1)
 		// Render the full column with its calculated width.
 		col1 := lipgloss.NewStyle().Width(columnWidth).Render(col1Content)
 
-		key2 := labelStyle.Copy().Width(keyWidth).Render(r.center)
-		val2 := valueStyle.Render(r.cvalue)
+		key2 := LabelStyle.Copy().Width(keyWidth).Render(r.center)
+		val2 := ValueStyle.Render(r.cvalue)
 		col2Content := lipgloss.JoinHorizontal(lipgloss.Left, key2, sep, val2)
 		col2 := lipgloss.NewStyle().Width(columnWidth).Render(col2Content)
 
-		key3 := labelStyle.Copy().Width(keyWidth).Render(r.right)
-		val3 := valueStyle.Render(r.rvalue)
+		key3 := LabelStyle.Copy().Width(keyWidth).Render(r.right)
+		val3 := ValueStyle.Render(r.rvalue)
 		col3Content := lipgloss.JoinHorizontal(lipgloss.Left, key3, sep, val3)
 		col3 := lipgloss.NewStyle().Width(lastColumnWidth).Render(col3Content)
 
@@ -99,5 +88,5 @@ func (m headerModel) View() string {
 	}
 
 	content := lipgloss.JoinHorizontal(lipgloss.Top, rows...)
-	return headerStyle.Width(m.width - 2).Render(content)
+	return HeaderStyle.Width(m.width - 2).Render(content)
 }

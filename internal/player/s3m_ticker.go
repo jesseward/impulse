@@ -143,10 +143,6 @@ func (t *S3MTicker) handleEffect(p *Player, state *channelState, cell *module.Ce
 	}
 }
 
-
-
-
-
 func (t *S3MTicker) tonePortamento(state *channelState, param byte) {
 	if param > 0 {
 		state.portaSpeed = uint16(param) * 4
@@ -232,8 +228,6 @@ func (t *S3MTicker) specialEffect(state *channelState, param byte, nextRow *int,
 		// Not implemented
 	}
 }
-
-
 
 func (t *S3MTicker) GetPeriod(period uint16, offset int) uint16 {
 	// this is not correct.

@@ -54,13 +54,13 @@ func newSamplerModel(m module.Module) samplerModel {
 
 	s := table.DefaultStyles()
 	s.Header = s.Header.
-		BorderStyle(lipgloss.NormalBorder()).
-		BorderForeground(lipgloss.Color("240")).
+		BorderStyle(CurrentTheme.HeaderBorder).
+		BorderForeground(CurrentTheme.Border).
 		BorderBottom(true).
-		Bold(false)
+		Bold(true)
 	s.Selected = s.Selected.
-		Foreground(lipgloss.Color("15")).
-		Background(lipgloss.Color("27")).
+		Foreground(CurrentTheme.ActiveRowFg).
+		Background(CurrentTheme.ActiveRowBg).
 		Bold(false)
 	t.SetStyles(s)
 
@@ -80,8 +80,8 @@ func (m samplerModel) Update(msg tea.Msg) (samplerModel, tea.Cmd) {
 func (m samplerModel) View() string {
 
 	style := lipgloss.NewStyle().
-		Border(lipgloss.NormalBorder(), true).
-		Inherit(borderColorStyle).
+		Border(CurrentTheme.AppBorder, true).
+		Inherit(BorderColorStyle).
 		Width(m.width - 2).
 		Height(m.height)
 	return style.Render(m.table.View())

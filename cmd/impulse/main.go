@@ -50,6 +50,12 @@ func main() {
 						Name:  "v2",
 						Usage: "start the new v2 terminal UI",
 					},
+					&cli.StringFlag{
+						Name:    "theme",
+						Aliases: []string{"t"},
+						Value:   "ocean",
+						Usage:   "UI theme (ocean, sunset, nature, gray)",
+					},
 				},
 			},
 			{

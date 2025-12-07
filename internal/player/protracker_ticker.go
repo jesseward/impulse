@@ -21,8 +21,6 @@ var periodTable = [16 * 36]uint16{
 	862, 814, 768, 725, 684, 646, 610, 575, 543, 513, 484, 457, 431, 407, 384, 363, 342, 323, 305, 288, 272, 256, 242, 228, 216, 203, 192, 181, 171, 161, 152, 144, 136, 128, 121, 114,
 }
 
-
-
 type ProtrackerTicker struct{}
 
 func (t *ProtrackerTicker) ProcessTick(p *Player, playerState *playerState, channelState *channelState, cell *module.Cell, speed, bpm, nextRow, nextOrder, currentOrder *int, tick int) {
@@ -213,8 +211,6 @@ func (t *ProtrackerTicker) handleExtendedEffect(state *channelState, command, va
 		playerState.patternDelay = int(value)
 	}
 }
-
-
 
 func (t *ProtrackerTicker) GetPeriod(period uint16, offset int) uint16 {
 	finetune := 0

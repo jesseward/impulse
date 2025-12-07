@@ -20,13 +20,12 @@ func (m *footerModel) SetWidth(width int) {
 
 func (m footerModel) View() string {
 	style := lipgloss.NewStyle().
-		Foreground(lipgloss.Color("#FFFFC0")).
-		Border(lipgloss.NormalBorder(), true).
-		Inherit(borderColorStyle).
-		Faint(true).
+		Foreground(CurrentTheme.Primary).
+		Border(CurrentTheme.AppBorder, true).
+		Inherit(BorderColorStyle).
 		Width(m.width).
 		Align(lipgloss.Center)
 
-	text := "'tab' toggle pattern or sample view | 'spacebar' Start/Stop Song | 'q' Quit"
+	text := "'tab' toggle pattern or sample view │ 'spacebar' Start/Stop Song │ 'q' Quit"
 	return style.Render(text)
 }
